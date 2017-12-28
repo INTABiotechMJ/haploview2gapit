@@ -14,6 +14,6 @@ For all the complete sequences alignments that match previous criteria, the nucl
 Once all incomplete sequences are scanned and no replacement is done, a file for input in Gapit is generated. The first column correspond to a cultivar name, and a new column is added for each haplotype and for each different sequence from that haplotype. A 1 is placed if the sequence of the cultivar matches the sequence of the haplotype in the column name, and a 0 otherwise.
 
 
-´´´
+```
 python haplo2gapit.py input.csv output.csv
-´´´
+```
