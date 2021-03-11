@@ -19,9 +19,9 @@ parser.add_argument("-v","--verbosity", help="increase output verbosity")
 args = parser.parse_args()
 def make_log(output):
     if args.verbosity:
-        print(output)
+        print output
 
-df = pd.read_csv(args.input,sep=",", encoding='latin1')
+df = pd.read_csv(args.input,sep=",")
 
 all_data = []
 allacc=[]
@@ -36,11 +36,10 @@ while has_missing_data:
         make_log("*"*20)
         make_log("Marker: " + column)
         for k,sequence in df[column].iteritems():
-            sequence = str(sequence)
             # we have a missing value
-            #if not isinstance(sequence, str):
-                #print('Sequence ' + str(sequence) + ' is not a string')
-            #    continue
+            if not isinstance(sequence, basestring):
+                print 'Sequence ' + str(sequence) + ' is not a string'
+                continue
             if sequence.count('-') * 100 / len(sequence) > 10:
                 make_log('More than 10% missing spots, skipping')
                 continue
@@ -74,7 +73,7 @@ while has_missing_data:
             if len(consensus) == 1:
                 has_missing_data = True
                 #max_nucleotide = max(consensus.iteritems(), key=operator.itemgetter(1))[0]
-                unique_nucleotide = list(consensus.keys())[0]
+                unique_nucleotide = consensus.keys()[0]
                 make_log("Found unique nucleotide: " + unique_nucleotide)
                 df.loc[k,column] = sequence[:position] + unique_nucleotide + sequence[position+1:]
             elif len(consensus) == 0:
@@ -112,7 +111,7 @@ li = []
 li.append("Marker")
 for ad in all_data:
     marker, sequence = ad
-    li.append(marker + "_" + str(sequence))
+    li.append(marker + "_" + sequence)
 writer.writerow(li)
 for acc in allacc:
     li = []
@@ -125,4 +124,3 @@ for acc in allacc:
         else:
             li.append("0")
     writer.writerow(li)
-

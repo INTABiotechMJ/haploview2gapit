@@ -14,6 +14,23 @@ For all the complete sequences alignments that match previous criteria, the nucl
 Once all incomplete sequences are scanned and no replacement is done, a file for input in Gapit is generated. The first column correspond to a cultivar name, and a new column is added for each haplotype and for each different sequence from that haplotype. A 1 is placed if the sequence of the cultivar matches the sequence of the haplotype in the column name, and a 0 otherwise.
 
 
+
+## How to install dependencies and demo execution
+
+
 ```
-python haplo2gapit.py input.csv output.csv
+#create virtual environment
+virtualenv -p python3 venv
+#activate virtual environment
+source venv/bin/activate
+#install dependencies (biopython and pandas)
+pip install -r requirements.txt
+#run with demo data
+python haplo2gapit.py -i chr1.csv -o out.csv -v 1
 ```
+
+
+## Changelog
+
+#### 11 Mar 2021
+    Moved original code to haplo2gapit_python2 to try to support python3
