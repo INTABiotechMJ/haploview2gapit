@@ -26,7 +26,7 @@ source venv/bin/activate
 #install dependencies (biopython and pandas)
 pip install -r requirements.txt
 #run with demo data
-python haplo2gapit.py -i chr1.csv -o out.csv -v 1
+python haplo2gapit.py -i Chr1.csv -o out.csv -v 1
 ```
 
 
